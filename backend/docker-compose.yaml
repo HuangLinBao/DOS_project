@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  server1:
+    build: ./path/to/server1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+  server2:
+    build: ./path/to/server2
+    ports:
+      - "3001:3000"
+    depends_on:
+      - database
+
+  database:
+    image: "books-db" # Use a pre-built SQLite image or create your own
+    volumes:
+      - ./database/books.sqlite # Mount the local SQLite directory into the container
