@@ -1,21 +1,19 @@
 version: "3"
 
 services:
-  server1:
-    build: ./path/to/server1
+  catalog_server:
+    build: ./catalog_server
     ports:
       - "3000:3000"
     depends_on:
       - database
 
-  server2:
-    build: ./path/to/server2
+  order_server:
+    build: ./order_server
     ports:
-      - "3001:3000"
-    depends_on:
-      - database
+      - "3001:3001"
 
   database:
-    image: "books-db" # Use a pre-built SQLite image or create your own
+    image: "keinos/sqlite3" # Use a pre-built SQLite image or create your own
     volumes:
-      - ./database/books.sqlite # Mount the local SQLite directory into the container
+      - ./database # Mount the local SQLite directory into the container
