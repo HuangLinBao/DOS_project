@@ -40,8 +40,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
   "& .MuiDialog-paperWidthSm": {
-    // Set your desired width
-    maxWidth: "1380px", // Adjust as needed
+    maxWidth: "1380px",
     width: "100%",
   },
 }));
@@ -61,6 +60,7 @@ export default function BookCard(props) {
           quantity: "1",
         }
       );
+      //for the alert component
       setPurchaseStatus({
         type: "success",
         message: "Purchase successful!",
@@ -71,7 +71,6 @@ export default function BookCard(props) {
         type: "error",
         message: "Error making purchase. Please try again.",
       });
-      // Handle error, show a message, etc.
     }
   };
 

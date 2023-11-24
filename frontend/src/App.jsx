@@ -21,13 +21,12 @@ function App() {
 
   // useEffect to fetch data when the component mounts
   useEffect(() => {
-    // Replace 'your-api-endpoint' with the actual endpoint to fetch data from your server
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "http://localhost:3000/api/catalog/books"
         );
-        setBooks(response.data); // Assuming the response is an array of books
+        setBooks(response.data); // the response is an array of books
       } catch (error) {
         console.error("Error fetching data:", error);
       }
