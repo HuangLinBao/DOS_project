@@ -3,8 +3,10 @@ import sequelize from "./db.js";
 import Books from "./books.js";
 import catalog from "./routes/catalog.js";
 import update from "./routes/update.js";
-var app = express();
+import cors from "cors";
 
+var app = express();
+app.use(cors());
 app.use(express.json());
 sequelize.sync().then(() => {
   console.log("db is ready");
