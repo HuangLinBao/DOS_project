@@ -5,7 +5,10 @@ const update = express.Router();
 update.put("/updateStock/", async (req, res) => {
   const stock = req.body.newStock;
   const uuid = req.body.uuid;
-  const books = await Books.update({ stock: stock }, { where: { uuid: uuid } });
+  const books = await Books.update(
+    { stock: stock },
+    { where: { uuid: uuid }, individualHooks: true }
+  );
   res.send(books);
 });
 

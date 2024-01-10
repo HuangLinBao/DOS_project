@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import sequelize from "./db.js";
+import sequelize, { logChange } from "./db.js";
 class Books extends Model {}
 
 Books.init(
@@ -32,4 +32,15 @@ Books.init(
   }
 );
 
+Books.beforeCreate((book, options) => {
+  logChange("INSERT", book.toJSON());
+});
+
+Books.beforeUpdate(async (book, options) => {
+  logChange("UPDATE", book.toJSON());
+});
+
+Books.beforeDestroy((book, options) => {
+  logChange("DELETE", book.toJSON());
+});
 export default Books;

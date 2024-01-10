@@ -8,5 +8,5 @@ app.use(express.json());
 app.use("/api/order", order);
 
 app.listen(3001, function () {
-  console.log("Example app listening on port 3001!");
+  console.log("Example order listening on port 3001!");
 });

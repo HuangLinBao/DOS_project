@@ -3,6 +3,7 @@ import sequelize from "./db.js";
 import Books from "./books.js";
 import catalog from "./routes/catalog.js";
 import update from "./routes/update.js";
+import sync from "./routes/sync.js";
 import cors from "cors";
 
 var app = express();
@@ -18,6 +19,7 @@ app.post("/books", function (req, res) {
 });
 app.use("/api/catalog", catalog);
 app.use("/api/update", update);
+app.use("/api/sync", sync);
 
 app.listen(6000, function () {
   console.log("catalog replica 1 listening on port 6000!");
