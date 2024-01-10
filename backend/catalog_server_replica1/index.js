@@ -4,6 +4,7 @@ import Books from "./books.js";
 import catalog from "./routes/catalog.js";
 import update from "./routes/update.js";
 import cors from "cors";
+import sync from "../catalog_server/routes/sync.js";
 
 var app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.post("/books", function (req, res) {
 });
 app.use("/api/catalog", catalog);
 app.use("/api/update", update);
+app.use("/api/sync", sync);
 
 app.listen(6000, function () {
   console.log("catalog replica 1 listening on port 6000!");

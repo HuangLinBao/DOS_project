@@ -4,6 +4,7 @@ import Books from "./books.js";
 import catalog from "./routes/catalog.js";
 import update from "./routes/update.js";
 import cors from "cors";
+import sync from "./routes/sync.js";
 
 var app = express();
 app.use(cors());
@@ -18,7 +19,8 @@ app.post("/books", function (req, res) {
 });
 app.use("/api/catalog", catalog);
 app.use("/api/update", update);
+app.use("/api/sync", sync);
 
 app.listen(3000, function () {
-  console.log("Example app listening on port 3000!");
+  console.log("Example catalog listening on port 3000!");
 });
