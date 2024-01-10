@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import BookCard from "./Components/BooksCard";
 import axios from "axios";
 let currentServerIndex = 0;
-const servers = ["http://localhost:7000","http://localhost:6001","http://localhost:3000"]; // Replace with your server URLs
+const servers = ["http://localhost:7000","http://localhost:6000","http://localhost:3000"]; // Replace with your server URLs
 function App() {
   // State to store the fetched data
   const [books, setBooks] = useState([]);
