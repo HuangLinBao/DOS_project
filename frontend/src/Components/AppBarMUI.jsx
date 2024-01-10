@@ -52,40 +52,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const cache = {}; // In-memory cache object
+let currentServerIndex = 0;
+const servers = ["http://localhost:7000",
+                 "http://localhost:6001",
+                 "http://localhost:3000"]; // Replace with your server URLs
+
 export default function SearchAppBar({ setSearchResults }) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
-    console.log("Search query changed:", searchQuery);
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/catalog/search",
-          {
-            params: {
-              query: searchQuery,
-            },
-          }
-        );
-        {
+        if (cache[searchQuery]) {
+          setSearchResults(cache[searchQuery]);
+        } else {
+          const response = await axios.get(servers[currentServerIndex] + '/api/catalog/search', {
+            params: { query: searchQuery },
+          });
           setSearchResults(response.data);
+          cache[searchQuery] = response.data;
+          currentServerIndex = (currentServerIndex + 1) % servers.length; 
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
-    // Fetch data only if searchQuery is not empty
-    if (searchQuery.trim() !== "") {
+
+    if (searchQuery.trim() !== '') {
       fetchData();
     } else {
-      // Clear results if searchQuery is empty
-      {
-        setSearchResults([]);
-      }
+      setSearchResults([]);
     }
-  }, [searchQuery]);
+  }, [searchQuery, setSearchResults]);
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
