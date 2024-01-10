@@ -44,7 +44,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     width: "100%",
   },
 }));
-const servers = ["http://localhost:3001","http://localhost:6003","http://localhost:7001"]
+const servers = ["http://localhost:3001","http://localhost:6001","http://localhost:7001"]
 export default function BookCard(props) {
   const value = 4.5;
   const { id, title, price, cat, stock } = props;
