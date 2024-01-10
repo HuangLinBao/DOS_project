@@ -14,7 +14,7 @@ export const logChange = (operation, data) => {
 };
 const propagateChangesToLeader = (changes) => {
   const replicaUrls = [
-    "http://localhost:3000/sync", // catalog replica 1
+    "http://localhost:3000/api/sync/", // catalog replica 1
   ];
 
   // Propagate changes to each replica

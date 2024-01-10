@@ -3,8 +3,8 @@ import sequelize from "./db.js";
 import Books from "./books.js";
 import catalog from "./routes/catalog.js";
 import update from "./routes/update.js";
+import sync from "./routes/sync.js";
 import cors from "cors";
-import sync from "../catalog_server/routes/sync.js";
 
 var app = express();
 app.use(cors());

@@ -36,7 +36,7 @@ Books.beforeCreate((book, options) => {
   logChange("INSERT", book.toJSON());
 });
 
-Books.beforeUpdate((book, options) => {
+Books.beforeUpdate(async (book, options) => {
   logChange("UPDATE", book.toJSON());
 });
 
