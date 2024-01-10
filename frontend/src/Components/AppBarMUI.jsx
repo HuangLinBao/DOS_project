@@ -53,6 +53,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const cache = {}; // In-memory cache object
+let currentServerIndex = 0;
+const servers = ["http://localhost:3000/api/update/updateStock", "http://localhost:3000/api/catalog/search",
+"http://localhost:3000/api/catalog/search/:name","http://localhost:3000/api/catalog/search/:uuid","http://localhost:3000/api/catalog/books","http://localhost:3000/api/catalog/search/${uuid}",
+"http://localhost:3000/api/update/updateStock","http://localhost:3001"]; // Replace with your server URLs
 
 export default function SearchAppBar({ setSearchResults }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,13 +67,12 @@ export default function SearchAppBar({ setSearchResults }) {
         if (cache[searchQuery]) {
           setSearchResults(cache[searchQuery]);
         } else {
-          const response = await axios.get('http://localhost:3000/api/catalog/search', {
+          const response = await axios.get(servers[currentServerIndex] + '/api/catalog/search', {
             params: { query: searchQuery },
           });
           setSearchResults(response.data);
-
-          // Cache the fetched data for future use
           cache[searchQuery] = response.data;
+          currentServerIndex = (currentServerIndex + 1) % servers.length; // Update server index
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -81,7 +84,7 @@ export default function SearchAppBar({ setSearchResults }) {
     } else {
       setSearchResults([]);
     }
-  }, [searchQuery]);
+  }, [searchQuery, setSearchResults]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
