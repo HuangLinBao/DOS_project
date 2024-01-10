@@ -7,6 +7,6 @@ app.use(express.json());
 
 app.use("/api/order", order);
 
-app.listen(6001, function () {
-  console.log("order replica 1 app listening on port 6001!");
+app.listen(4001, function () {
+  console.log("order replica 1 app listening on port 4001!");
 });

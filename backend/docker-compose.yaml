@@ -9,16 +9,16 @@ services:
       - database
 
   catalog_server_replica1:
-    build: ./catalog_server
+    build: ./catalog_server_replica1
     ports:
-      - "6000:6000"
+      - "4000:4000"
     depends_on:
       - database
 
   catalog_server_replica2:
-    build: ./catalog_server
+    build: ./catalog_server_replica2
     ports:
-      - "7000:7000"
+      - "5000:5000"
     depends_on:
       - database
 
@@ -28,14 +28,14 @@ services:
       - "3001:3001"
 
   order_server_replica1:
-    build: ./order_server
+    build: ./order_server_replica1
     ports:
-      - "6001:6001"
+      - "4001:4001"
 
   order_server_replica2:
-    build: ./order_server
+    build: ./order_server_replica2
     ports:
-      - "7001:7001"
+      - "5001:5001"
 
   database:
     image: "keinos/sqlite3" #this image for some reason doesn't work properly

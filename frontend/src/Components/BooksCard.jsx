@@ -44,7 +44,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     width: "100%",
   },
 }));
-const servers = ["http://localhost:3001","http://localhost:6001","http://localhost:7001"]
+const servers = [
+  "http://localhost:4001",
+  "http://localhost:5001",
+  "http://localhost:3001",
+];
 export default function BookCard(props) {
   const value = 4.5;
   const { id, title, price, cat, stock } = props;
@@ -58,14 +62,17 @@ export default function BookCard(props) {
       servers.push(nextServer);
 
       // Make the purchase request to the selected server
-      const response = await axios.post(`${nextServer}/api/order/books/purchase`, {
-        uuid: "25278d7b-7bc5-4b9e-8f8a-dc8df0944f4a",
-        quantity: "1",
-      });
+      const response = await axios.post(
+        `${nextServer}/api/order/books/purchase`,
+        {
+          uuid: id,
+          quantity: "1",
+        }
+      );
       //for the alert component
       setPurchaseStatus({
         type: "success",
-        message: nextServer+"Purchase successful!",
+        message: nextServer + "Purchase successful!",
       });
     } catch (error) {
       console.error("Error making purchase:", error);
