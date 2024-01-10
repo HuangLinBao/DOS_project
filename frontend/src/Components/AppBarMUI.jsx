@@ -54,9 +54,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const cache = {}; // In-memory cache object
 let currentServerIndex = 0;
-const servers = ["http://localhost:3000/api/update/updateStock", "http://localhost:3000/api/catalog/search",
-"http://localhost:3000/api/catalog/search/:name","http://localhost:3000/api/catalog/search/:uuid","http://localhost:3000/api/catalog/books","http://localhost:3000/api/catalog/search/${uuid}",
-"http://localhost:3000/api/update/updateStock","http://localhost:3001"]; // Replace with your server URLs
+const servers = ["http://localhost:7000",
+                 "http://localhost:6001",
+                 "http://localhost:3000"]; // Replace with your server URLs
 
 export default function SearchAppBar({ setSearchResults }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,7 +72,7 @@ export default function SearchAppBar({ setSearchResults }) {
           });
           setSearchResults(response.data);
           cache[searchQuery] = response.data;
-          currentServerIndex = (currentServerIndex + 1) % servers.length; // Update server index
+          currentServerIndex = (currentServerIndex + 1) % servers.length; 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
