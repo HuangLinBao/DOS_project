@@ -8,12 +8,36 @@ services:
     depends_on:
       - database
 
+  catalog_server_replica1:
+    build: ./catalog_server
+    ports:
+      - "6000:6000"
+    depends_on:
+      - database
+
+  catalog_server_replica2:
+    build: ./catalog_server
+    ports:
+      - "7000:7000"
+    depends_on:
+      - database
+
   order_server:
     build: ./order_server
     ports:
       - "3001:3001"
 
+  order_server_replica1:
+    build: ./order_server
+    ports:
+      - "6001:6001"
+
+  order_server_replica2:
+    build: ./order_server
+    ports:
+      - "7001:7001"
+
   database:
-    image: "keinos/sqlite3" # Use a pre-built SQLite image or create your own
+    image: "keinos/sqlite3" #this image for some reason doesn't work properly
     volumes:
       - ./database # Mount the local SQLite directory into the container
