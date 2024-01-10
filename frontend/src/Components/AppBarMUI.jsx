@@ -51,12 +51,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-const cache = {}; // In-memory cache object
+// In-memory cache
+const cache = {}; 
 let currentServerIndex = 0;
 const servers = ["http://localhost:7000",
-                 "http://localhost:6001",
-                 "http://localhost:3000"]; // Replace with your server URLs
+                 "http://localhost:6000",
+                 "http://localhost:3000"]; 
 
 export default function SearchAppBar({ setSearchResults }) {
   const [searchQuery, setSearchQuery] = useState('');
