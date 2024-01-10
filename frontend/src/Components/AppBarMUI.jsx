@@ -51,8 +51,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-const cache = {}; // In-memory cache object
+// In-memory cache
+const cache = {};
 let currentServerIndex = 0;
 const servers = [
   "http://localhost:5000",
