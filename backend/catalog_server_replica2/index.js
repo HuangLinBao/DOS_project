@@ -21,6 +21,6 @@ app.use("/api/catalog", catalog);
 app.use("/api/update", update);
 app.use("/api/sync", sync);
 
-app.listen(7000, function () {
-  console.log("catalog replica 2 listening on port 7000!");
+app.listen(5000, function () {
+  console.log("catalog replica 2 listening on port 5000!");
 });
