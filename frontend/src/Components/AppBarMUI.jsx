@@ -66,31 +66,30 @@ export default function SearchAppBar({ setSearchResults }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (cache[searchQuery]) {
-          setSearchResults(cache[searchQuery]);
+        if (searchQuery.trim() !== "") {
+          if (cache[searchQuery]) {
+            setSearchResults(cache[searchQuery]);
+          } else {
+            const response = await axios.get(
+              servers[currentServerIndex] + "/api/catalog/search",
+              {
+                params: { query: searchQuery },
+              }
+            );
+            setSearchResults(response.data);
+            cache[searchQuery] = response.data;
+            currentServerIndex = (currentServerIndex + 1) % servers.length;
+          }
         } else {
-          const response = await axios.get(
-            servers[currentServerIndex] + "/api/catalog/search",
-            {
-              params: { query: searchQuery },
-            }
-          );
-          setSearchResults(response.data);
-          cache[searchQuery] = response.data;
-          currentServerIndex = (currentServerIndex + 1) % servers.length;
+          // If searchQuery is empty, reset searchResults to an empty array
+          setSearchResults([]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    if (searchQuery.trim() !== "") {
-      fetchData();
-    } else {
-      // If searchQuery is empty, set searchResults to the entire cached data
-      const allCachedData = Object.values(cache).flat();
-      setSearchResults(allCachedData);
-    }
+    fetchData();
   }, [searchQuery, setSearchResults]);
 
   const handleSearchChange = (event) => {

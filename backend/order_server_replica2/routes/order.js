@@ -8,7 +8,7 @@ order.post("/books/purchase", (req, res) => {
     const quantity = req.body.quantity;
     // Get current stock
     axios
-      .get(`http://localhost:7000/api/catalog/search/${uuid}`)
+      .get(`http://localhost:5000/api/catalog/search/${uuid}`)
       .then((response) => {
         const currentStock = response.data.stock;
         // Calculate new stock
@@ -18,7 +18,7 @@ order.post("/books/purchase", (req, res) => {
         if (Number.isFinite(newStock)) {
           // Update stock
           axios
-            .put("http://localhost:7000/api/update/updateStock", {
+            .put("http://localhost:5000/api/update/updateStock", {
               uuid: uuid,
               newStock: newStock,
             })
